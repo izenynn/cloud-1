@@ -1,0 +1,11 @@
+plugin: community.general.linode
+
+tags:
+  - ansible-wp
+
+keyed_groups:
+  - key: region
+    prefix: region
+
+compose:
+  ansible_host: 'ipv4[0]'

@@ -4,6 +4,11 @@
 
 Automated deployment of Inception on a remote server using Ansible.
 
+This project inventory is dynamic and designed to deploy on `Linode`,
+if you want to deploy on another cloud provider, or on on-premise servers,
+you can skip all the linode-related dependencies and just create your own
+inventory file.
+
 ## Dependencies
 
 - `python3`.
@@ -39,6 +44,31 @@ If not in the list, install `community.general` collection by running:
 ansible-galaxy collection install community.general
 ```
 
+If it's in the list but version is below `8.1.0`, upgrade it by running:
+```bash
+ansible-galaxy collection install community.general --upgrade
+```
+
 ## Deploy
 
-TODO
+If deploying on `Linode` export your API token:
+```bash
+export LINODE_API_TOKEN='your_token_here'
+```
+
+## Common errors
+
+### Unexpected keyword argument 'allowed_methods'
+
+If you get this error when parsing the linode inventory file:
+```
+[WARNING]:  * Failed to parse /.../inventory.linode.yml with ansible_collections.community.general.plugins.inventory.linode plugin: __init__() got an unexpected keyword argument 'allowed_methods'
+```
+
+There's an incompatibility issue due to the `allowed_methods` argument in the
+`urllib3.util.retry` module, which was added in `urllib3` version `1.26.0`.
+
+To resolve this issue, you need to upgrade `urllib3` to a version `1.26.0` or higher:
+```bash
+python3 -m pip install --upgrade urllib3
+```
