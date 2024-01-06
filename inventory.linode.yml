@@ -4,6 +4,8 @@ tags:
   - ansible-wp
 
 keyed_groups:
+  - key: tags
+    separator: ''
   - key: region
     prefix: region
 

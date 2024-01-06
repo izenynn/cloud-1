@@ -72,3 +72,8 @@ To resolve this issue, you need to upgrade `urllib3` to a version `1.26.0` or hi
 ```bash
 python3 -m pip install --upgrade urllib3
 ```
+
+And `request` in case you get a warning about not supported `urllib3` version:
+```bas
+python3 -m pip install --upgrade requests
+```
