@@ -49,6 +49,19 @@ If it's in the list but version is below `8.1.0`, upgrade it by running:
 ansible-galaxy collection install community.general --upgrade
 ```
 
+## Log
+
+This project uses `/var/log/ansible` for log, change it on `ansible.cfg` or
+create it along with an `ansible` group (recommended):
+```bash
+sudo touch /var/log/ansible.log
+
+sudo groupadd ansible
+sudo chown root:ansible /var/log/ansible.log
+sudo chmod 775 /var/log/ansible.log
+sudo usermod "$USER" -aG ansible
+```
+
 ## Deploy
 
 If deploying on `Linode` export your API token:
@@ -56,7 +69,7 @@ If deploying on `Linode` export your API token:
 export LINODE_API_TOKEN='your_token_here'
 ```
 
-## Common errors
+## Common issues
 
 ### Unexpected keyword argument 'allowed_methods'
 
