@@ -1,3 +1,4 @@
+---
 - name: Setup WordPress server
   hosts: all
   gather_facts: no
@@ -7,12 +8,12 @@
     - vars/vault.yml
 
   pre_tasks:
-    - name: "Check SSH port availability"
+    - name: "Check custom SSH port availability"
       tags:
         - always
         - ssh_port
       wait_for:
-        host: "{{ inventory_hostname }}"
+        host: "{{ ansible_host }}"
         port: "{{ ansible_port }}"
         state: "started"
         timeout: 1
@@ -21,9 +22,39 @@
       ignore_errors: true
       changed_when: false
       failed_when: false
-      register: ssh_port
+      register: ssh_port_custom
 
-    - name: "Set SSH port to 22"
+    - name: "Check default SSH port availability"
+      tags:
+        - always
+        - ssh_port
+      wait_for:
+        host: "{{ ansible_host }}"
+        port: "22"
+        state: "started"
+        timeout: 1
+      delegate_to: "localhost"
+      become: false
+      ignore_errors: true
+      changed_when: false
+      failed_when: false
+      register: ssh_port_default
+      when:
+        - ssh_port_custom.state is not defined
+
+    - name: "Fail if host not available"
+      tags:
+        - always
+        - ssh_port
+      fail:
+        msg: |
+          Can't connect with neither custom nor default SSH ports to {{ inventory_hostname }} ({{ ansible_host }}).
+          Is the host up?
+      when:
+        - ssh_port_custom.state is not defined
+        - ssh_port_default.state is not defined
+
+    - name: "Set SSH port to default if needed"
       tags:
         - always
         - ssh_port
@@ -32,8 +63,7 @@
         ansible_port: "22"
       changed_when: false
       when:
-        - ssh_port is defined
-        - ssh_port.state is not defined
+        - ssh_port_custom.state is not defined
 
     - name: "Debug ansible_port"
       tags:
@@ -41,4 +71,3 @@
         - ssh_port
       debug:
         var: ansible_port
-
