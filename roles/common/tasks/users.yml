@@ -1,0 +1,10 @@
+---
+- name: "Create 'ansible' user"
+  tags:
+    - always
+    - setup
+    - users
+  user:
+    name: ansible
+    state: present
+    create_home: yes

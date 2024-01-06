@@ -71,3 +71,10 @@
         - ssh_port
       debug:
         var: ansible_port
+
+  roles:
+    - role: common
+      tags:
+        - always
+        - setup
+        - common
