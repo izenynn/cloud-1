@@ -1,0 +1,44 @@
+- name: Setup WordPress server
+  hosts: all
+  gather_facts: no
+
+  vars_files:
+    - vars/main.yml
+    - vars/vault.yml
+
+  pre_tasks:
+    - name: "Check SSH port availability"
+      tags:
+        - always
+        - ssh_port
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: "{{ ansible_port }}"
+        state: "started"
+        timeout: 1
+      delegate_to: "localhost"
+      become: false
+      ignore_errors: true
+      changed_when: false
+      failed_when: false
+      register: ssh_port
+
+    - name: "Set SSH port to 22"
+      tags:
+        - always
+        - ssh_port
+      set_fact:
+        ansible_user: "root"
+        ansible_port: "22"
+      changed_when: false
+      when:
+        - ssh_port is defined
+        - ssh_port.state is not defined
+
+    - name: "Debug ansible_port"
+      tags:
+        - debug
+        - ssh_port
+      debug:
+        var: ansible_port
+
