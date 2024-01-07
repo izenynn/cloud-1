@@ -9,7 +9,7 @@ if you want to deploy on another cloud provider, or on on-premise servers,
 you can skip all the linode-related dependencies and just create your own
 inventory file.
 
-The deployed services include:
+The docker deployed services include:
 
 - TODO
 - TODO
@@ -20,8 +20,9 @@ Other useful features:
 - Creation of an `ansible` user with locked login for playbook execution.
 - Creation of an `admin` user for administration (since `root` SSH login is disabled).
 - Adding your public key to `admin` authorized keys.
+- Ability to create new users with multiple customizable fields (including sudoers, authorized key, and more).
 - Hardening of `sudoers`.
-- TODO
+- Hardening with `ufw` and limit `ssh`.
 
 Is recommended to take a look at the playbook to fully understand features and how
 to use them.
