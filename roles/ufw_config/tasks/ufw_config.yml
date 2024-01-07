@@ -1,5 +1,5 @@
 ---
-- name: "Resut UFW"
+- name: "Reset UFW"
   ufw:
     state: reset
   when: reset_ufw | default(false)
