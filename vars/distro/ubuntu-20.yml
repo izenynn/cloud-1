@@ -1,0 +1,6 @@
+common_packages:
+  - bash
+  - curl
+  - wget
+  - vim
+  - git
