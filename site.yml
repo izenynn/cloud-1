@@ -65,7 +65,7 @@
       when:
         - ssh_port_custom.state is not defined
 
-    - name: "Debug ansible_port"
+    - name: "Debug SSH port (ansible_port)"
       tags:
         - debug
         - ssh_port
