@@ -1,5 +1,5 @@
-- name: "Include Ubuntu specific variables"
+- name: "Include Debian OS specific variables"
   include_vars:
-    file: distro/ubuntu.yml
+    file: os/debian.yml
   when:
-    - ansible_facts['distribution'] == 'Ubuntu'
+    - ansible_facts['os_family'] == 'Debian'

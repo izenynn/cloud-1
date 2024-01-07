@@ -83,8 +83,8 @@
           Unsupported host system: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }} ({{ ansible_facts['os_family'] }}).
           Check documentation for more info about supported systems.
       when: >
-        ansible_facts['distribution'] not in [
-          'Ubuntu',
+        ansible_facts['os_family'] not in [
+          'Debian',
         ]
 
     - name: "Include task to set distro specific variables"

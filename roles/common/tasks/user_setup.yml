@@ -1,7 +1,7 @@
 ---
 - name: "Create users"
   tags:
-    - users
+    - user
   user:
     name: "{{ item.username }}"
     state: present
@@ -15,7 +15,7 @@
 
 - name: "Set or update user passwords"
   tags:
-    - users
+    - user
   user:
     name: "{{ item.username }}"
     password: "{{ (item.password | default('') | password_hash('sha512')) if item.password is defined else omit }}"
