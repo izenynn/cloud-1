@@ -1,1 +1,9 @@
-
+users:
+  - username: ansible
+    # password not defined, locked user (only for ssh via auth-key)
+    is_sudo: true
+    is_sudo_nopasswd: true
+  - username: admin
+    password: "{{ admin_user_password }}"  # in `vault.yml`
+    is_sudo: true
+    is_sudo_nopasswd: false

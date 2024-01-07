@@ -1,10 +1,57 @@
 ---
-- name: "Create 'ansible' user"
+- name: "Create users"
   tags:
-    - always
-    - setup
     - users
   user:
-    name: ansible
+    name: "{{ item.username }}"
     state: present
-    create_home: yes
+    groups: "{{ 'sudo' if item.is_sudo else omit }}"
+    append: true
+    password: "{{ (item.password | default('') | password_hash('sha512')) if item.password is defined else omit }}"
+    update_password: on_create
+    create_home: true
+  no_log: "{{ ansible_verbosity < 1 }}"
+  with_items: "{{ users }}"
+
+- name: "Set or update user passwords"
+  tags:
+    - users
+  user:
+    name: "{{ item.username }}"
+    password: "{{ (item.password | default('') | password_hash('sha512')) if item.password is defined else omit }}"
+    update_password: always
+  no_log: "{{ ansible_verbosity < 1 }}"
+  when: item.password is defined and (update_passwords | default(false))
+  with_items: "{{ users }}"
+
+- name: "Add sudoers file for passwordless sudo users"
+  tags:
+    - users
+  copy:
+    dest: "/etc/sudoers.d/10-user-{{ item.username }}"
+    content: "{{ item.username }} ALL=(ALL) NOPASSWD:ALL\n"
+    validate: 'visudo -cf %s'
+    owner: root
+    group: root
+    mode: 0440
+  no_log: "{{ ansible_verbosity < 1 }}"
+  when: item.is_sudo_nopasswd
+  with_items: "{{ users }}"
+
+- name: "Configure general sudo group in sudoers"
+  tags:
+    - users
+  copy:
+    dest: "/etc/sudoers.d/99-group-sudo"
+    content: |
+      # Custom sudoers file configuration
+      # Explicitely reset existing configuration for the sudo group
+      %sudo ALL=(ALL) ALL
+      Defaults passwd_tries=3
+      Defaults logfile=/var/log/sudo
+      Defaults badpass_message="Unauthorized attempt has been logged."
+      # Additional custom configuration must be below this line
+    validate: 'visudo -cf %s'
+    owner: root
+    group: root
+    mode: 0440

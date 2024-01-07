@@ -75,6 +75,6 @@
   roles:
     - role: common
       tags:
-        - always
         - setup
         - common
+      become: true
