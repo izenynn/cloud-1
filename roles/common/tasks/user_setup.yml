@@ -1,4 +1,10 @@
 ---
+- name: Merge user lists
+  tags:
+    - user
+  set_fact:
+    users: "{{ default_users + additional_users | default([]) }}"
+
 - name: "Create users"
   tags:
     - user

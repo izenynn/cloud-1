@@ -1,0 +1,4 @@
+# Override default values here
+
+#ssh_port: 4242 # Make sure to also edit ansible.cfg `remote_port`
+#ssh_allow_root: false

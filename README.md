@@ -84,13 +84,14 @@ sudo usermod "$USER" -aG ansible
 
 ## Vars
 
-You can check and change them in `./vars/main.yml` for your needs.
-
-But since the `./vars/vault.yml` is encrypted, here's a list of required variables,
-that must be preset in the vault, so you can create this file easily:
+Since the `./vars/vault.yml` is encrypted, for the sake of you knowing what should
+be there, here's a list of required variables, that must be preset in the vault,
+so you can create this file easily:
 
 - `admin_user_password`: password for the `admin` user.
-- Other users passwords (if you add more users).
+
+> If you create additonal users, make sure to place those new passwords in the
+> vault too!
 
 ## Deploy
 
@@ -116,6 +117,15 @@ ansible-playbook --ask-vault-pass site.yml -e update_passwords=true
 > in multiple machines (that should have different passwords for security).
 
 ## Common issues
+
+### Connection time out after defaults modification
+
+If you changed the ssh port or the default users array in the defaults,
+make sure to change the remote user and port on `ansible.cfg`,
+by default it works with the `ansible` user and the port `4242`.
+
+> If the ssh custom port is closed it will attempt connection with `root` or port 22,
+> assuming ssh config is not yet changed.
 
 ### Unexpected keyword argument 'allowed_methods'
 

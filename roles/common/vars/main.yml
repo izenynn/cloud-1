@@ -1,0 +1,7 @@
+# Add more users you may want to create here
+
+#additional_users:
+#  - username: example
+#    password: MySecurePassword#123 # Password is optional
+#    is_sudo: true
+#    is_sudo_nopasswd: false

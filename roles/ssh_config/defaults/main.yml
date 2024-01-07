@@ -1,0 +1,2 @@
+ssh_port: 4242
+ssh_allow_root: false
