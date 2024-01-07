@@ -5,33 +5,65 @@
   set_fact:
     users: "{{ default_users + additional_users | default([]) }}"
 
+# ------------------------------------------------------------------------------
+# USER MANAGEMENT
+# ------------------------------------------------------------------------------
+
 - name: "Create users"
   tags:
     - user
   user:
     name: "{{ item.username }}"
     state: present
-    groups: "{{ 'sudo' if item.is_sudo else omit }}"
-    append: true
     password: "{{ (item.password | default('') | password_hash('sha512')) if item.password is defined else omit }}"
     update_password: on_create
-    create_home: true
-    shell: "{{ user_shell }}"
+    create_home: "{{ item.create_home | default(true) }}"
   no_log: "{{ ansible_verbosity < 1 }}"
   with_items: "{{ users }}"
 
-- name: "Set or update user passwords"
+- name: "Set or update users passwords (Skipped by default)"
   tags:
     - user
   user:
     name: "{{ item.username }}"
     password: "{{ (item.password | default('') | password_hash('sha512')) if item.password is defined else omit }}"
     update_password: always
+    create_home: false
   no_log: "{{ ansible_verbosity < 1 }}"
   when: item.password is defined and (update_passwords | default(false))
   with_items: "{{ users }}"
 
-- name: "Set user SSH authorized key"
+# ------------------------------------------------------------------------------
+# USER SHELL
+# ------------------------------------------------------------------------------
+
+- name: "Set users shells"
+  tags:
+    - user
+  user:
+    name: "{{ item.username }}"
+    shell: "{{ item.shell | default(default_user_shell) }}"
+    create_home: false
+  no_log: "{{ ansible_verbosity < 1 }}"
+  with_items: "{{ users }}"
+
+# ------------------------------------------------------------------------------
+# SSH AUTHORIZED KEY
+# ------------------------------------------------------------------------------
+
+- name: "Create home for users with authorized key"
+  tags:
+    - user
+  user:
+    name: "{{ item.username }}"
+    create_home: true
+  no_log: "{{ ansible_verbosity < 1 }}"
+  when:
+    - item.authorized_key is defined
+    - not ansible_facts.users[item.username].home is defined
+  with_items: "{{ users }}"
+
+- name: "Set users SSH authorized keys"
   tags:
     - user
   authorized_key:
@@ -41,6 +73,20 @@
     exclusive: false
   no_log: "{{ ansible_verbosity < 1 }}"
   when: item.authorized_key is defined
+  with_items: "{{ users }}"
+
+# ------------------------------------------------------------------------------
+# SUDO & SUDOERS
+# ------------------------------------------------------------------------------
+
+- name: "Add specified users to sudo group"
+  tags:
+    - user
+  user:
+    name: "{{ item.username }}"
+    groups: sudo
+    append: true
+  when: item.is_sudo | default(false)
   with_items: "{{ users }}"
 
 - name: "Add sudoers file for passwordless sudo users"
@@ -54,5 +100,5 @@
     group: root
     mode: 0440
   no_log: "{{ ansible_verbosity < 1 }}"
-  when: item.is_sudo_nopasswd
+  when: item.is_sudo_nopasswd | default(false)
   with_items: "{{ users }}"

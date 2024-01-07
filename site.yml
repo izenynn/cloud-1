@@ -78,6 +78,8 @@
       setup:
 
     - name: "Fail if host distro is not supported"
+      tags:
+        - always
       fail:
         msg: |
           Unsupported host system: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }} ({{ ansible_facts['os_family'] }}).
