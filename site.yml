@@ -77,12 +77,22 @@
         - always
       setup:
 
-  tasks:
+    - name: "Fail if host distro is not supported"
+      fail:
+        msg: |
+          Unsupported host system: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }} ({{ ansible_facts['os_family'] }}).
+          Check documentation for more info about supported systems.
+      when: >
+        ansible_facts['distribution'] not in [
+          'Ubuntu',
+        ]
+
     - name: "Include task to set distro specific variables"
       tags:
         - always
       include_tasks: tasks/set_vars.yml
 
+  tasks:
     - name: "Apply common configuration to all nodes"
       tags:
         - always
