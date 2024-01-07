@@ -1,7 +1,14 @@
-# Add more users you may want to create here
+# Add more users or override variables here
+
+#user_shell: "/bin/bash"
 
 #additional_users:
-#  - username: example
+#  - username: example_one
+#    password: MySecurePassword#123 # Optional value
+#    authorized_key: MyPublicKeyForSSH # Optional value
+#    is_sudo: true
+#    is_sudo_nopasswd: false
+#  - username: example_two
 #    password: MySecurePassword#123 # Optional value
 #    authorized_key: MyPublicKeyForSSH # Optional value
 #    is_sudo: true

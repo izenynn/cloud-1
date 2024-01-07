@@ -1,5 +1,5 @@
 ---
-- name: Apply common configuration
+- name: Setup WordPress server
   hosts: all
   gather_facts: no
 
@@ -93,7 +93,7 @@
       include_tasks: tasks/set_vars.yml
 
   tasks:
-    - name: "Apply common configuration to all nodes"
+    - name: "Apply common configuration"
       tags:
         - always
         - setup
@@ -101,5 +101,9 @@
         name: common
       become: true
 
-#- name: Setup WordPress server
-# TODO specific for wordpress tagged nodes
+    - name: "Apply ssh configuration"
+      tags:
+        - setup
+      import_role:
+        name: ssh_config
+      become: true

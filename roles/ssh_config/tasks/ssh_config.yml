@@ -1,0 +1,32 @@
+---
+- name: "Set SSH port based on ssh_port"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?Port'
+    line: "Port {{ ssh_port }}"
+    state: present
+  notify: restart sshd
+
+- name: "Set PermitRootLogin based on ssh_allow_root"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: "PermitRootLogin {{ 'yes' if ssh_allow_root else 'no' }}"
+    state: present
+  notify: restart sshd
+
+- name: "Ensure SSH key login is activated"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PubkeyAuthentication'
+    line: "PubkeyAuthentication yes"
+    state: present
+  notify: restart sshd
+
+- name: "Prohibit password authentication"
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: "PasswordAuthentication no"
+    state: present
+  notify: restart sshd

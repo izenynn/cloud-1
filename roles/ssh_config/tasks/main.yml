@@ -1,0 +1,3 @@
+---
+- name: "Include tasks for SSH server configuration"
+  include_tasks: ssh_config.yml

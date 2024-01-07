@@ -90,6 +90,9 @@ so you can create this file easily:
 
 - `admin_user_password`: password for the `admin` user.
 
+- `ansible_user_authorized_key`: public key to add to `ansible` authorized keys.
+- `admin_user_authorized_key`: public key to add to `admin` authorized keys.
+
 > If you create additonal users, make sure to place those new passwords in the
 > vault too!
 

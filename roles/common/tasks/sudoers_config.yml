@@ -5,21 +5,20 @@
     - sudoers
   lineinfile:
     path: /etc/sudoers
-    regexp: '^#includedir /etc/sudoers.d'
-    line: 'includedir /etc/sudoers.d'
+    line: '#includedir /etc/sudoers.d'
+    state: present
     validate: 'visudo -cf %s'
-  become: true
 
 - name: "Configure general sudo group in sudoers"
   tags:
     - user
     - sudoers
   copy:
-    dest: "/etc/sudoers.d/99-group-sudo"
+    dest: "/etc/sudoers.d/10-group-sudo"
     content: |
       # Custom sudoers file configuration
       # Explicitely reset existing configuration for the sudo group
-      %sudo ALL=(ALL) ALL
+      %sudo ALL=(ALL:ALL) ALL
       Defaults passwd_tries=3
       Defaults logfile=/var/log/sudo
       Defaults badpass_message="Unauthorized attempt has been logged."
