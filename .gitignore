@@ -1,1 +1,6 @@
+# Ansible retry files
 *.retry
+
+# Environmnet files
+.env
+**/.env

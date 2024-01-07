@@ -8,6 +8,11 @@ cleanup() {
     rm -f "$vault_password_file"
 }
 
+# Load environment variables from .env file
+if [ -f .env ]; then
+    export $(cat .env | xargs)
+fi
+
 # Check for Vault password in the environment variable and run the playbook
 if [ -z "$ANSIBLE_VAULT_PASSWORD" ]; then
     echo 'Info: Vault password environment variable (ANSIBLE_VAULT_PASSWORD) not set.'
