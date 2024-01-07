@@ -116,6 +116,19 @@ ansible-playbook --ask-vault-pass site.yml -e update_passwords=true
 > important, so it doesn't mesh around with passwords if this script is executed
 > in multiple machines (that should have different passwords for security).
 
+A `run_playbook.sh` script is also provided for convenience:
+```bash
+./run_playbook.sh
+```
+
+You can provide the `Linode` token and vault password via environment, or you
+can create a `.env` following the provided `.env.sample`, so you don't have to
+export the token and vault password for every new shell session:
+```bash
+cp .env.sample .env
+vim .env # Edit the values
+```
+
 ## Common issues
 
 ### Connection time out after defaults modification
