@@ -3,4 +3,4 @@
     file: distro/ubuntu-20.yml
   when:
     - ansible_facts['distribution'] == 'Ubuntu'
-    - ansible_facts['distribution_version'] == '20.04'
+    - ansible_facts['distribution_major_version'] == '20'
