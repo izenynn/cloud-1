@@ -1,6 +1,5 @@
-- name: "Include Ubuntu 20 specific variables"
+- name: "Include Ubuntu specific variables"
   include_vars:
-    file: distro/ubuntu-20.yml
+    file: distro/ubuntu.yml
   when:
     - ansible_facts['distribution'] == 'Ubuntu'
-    - ansible_facts['distribution_major_version'] == '20'
