@@ -1,5 +1,5 @@
 ---
-- name: Merge user lists
+- name: "Merge user lists"
   tags:
     - user
   set_fact:
@@ -86,6 +86,7 @@
     name: "{{ item.username }}"
     groups: sudo
     append: true
+    create_home: false
   no_log: "{{ ansible_verbosity < 1 }}"
   when: item.is_sudo | default(false)
   with_items: "{{ users }}"

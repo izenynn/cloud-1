@@ -1,0 +1,27 @@
+---
+# ------------------------------------------------------------------------------
+# SERVICE
+# ------------------------------------------------------------------------------
+
+- name: "Enable Docker service"
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+# ------------------------------------------------------------------------------
+# DOCKER GROUP
+# ------------------------------------------------------------------------------
+
+- name: "Merge user lists"
+  set_fact:
+    docker_users: "{{ default_docker_users + additional_docker_users | default([]) }}"
+
+- name: "Add specified users to docker group"
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: true
+    create_home: false
+  no_log: "{{ ansible_verbosity < 1 }}"
+  with_items: "{{ docker_users }}"

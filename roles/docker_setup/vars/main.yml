@@ -1,0 +1,5 @@
+# Add more users or override variables here
+
+#default_docker_users:
+#  - example_one
+#  - example_two

@@ -1,0 +1,6 @@
+---
+- name: "Include tasks for Docker installation"
+  include_tasks: package_setup.yml
+
+- name: "Include tasks for Docker setup"
+  include_tasks: docker_setup.yml

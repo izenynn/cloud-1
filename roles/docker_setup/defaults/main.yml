@@ -1,0 +1,3 @@
+default_docker_users:
+  - ansible
+  - admin

@@ -1,0 +1,54 @@
+---
+# ------------------------------------------------------------------------------
+# DEPENDENCIES
+# ------------------------------------------------------------------------------
+
+#- name: "Install aptitude package (Distro: Ubuntu)"
+#  apt:
+#    name: "aptitude"
+#    state: present
+#  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: "Install required system packages (Distro: Ubuntu)"
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+      - gnupg
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+# ------------------------------------------------------------------------------
+# INSTALLATION
+# ------------------------------------------------------------------------------
+
+- name: "Add Docker GPG apt key (Distro: Ubuntu)"
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: "Add Docker repository (Distro: Ubuntu)"
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: "Install Docker (Distro: Ubuntu)"
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+#- name: "Install Docker module for python"
+#  pip:
+#    name: docker

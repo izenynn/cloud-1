@@ -1,5 +1,5 @@
 ---
-- name: "Include tasks for package update and installation"
+- name: "Include tasks for package cache update and installation"
   include_tasks: package_setup.yml
 
 - name: "Include tasks for user creation"
