@@ -1,4 +1,10 @@
 ---
+- name: "Resut UFW"
+  ufw:
+    state: reset
+  when: reset_ufw | default(false)
+  notify: reload ufw
+
 - name: "Enable UFW"
   ufw:
     state: enabled

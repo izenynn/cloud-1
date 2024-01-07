@@ -108,17 +108,6 @@ And run the playbook:
 ansible-playbook --ask-vault-pass site.yml
 ```
 
-As you may expect, by default, password is only set on user creation (`update_password: on_create`).
-If you want to update users password, explicitely specify `update_passwords=true`,
-to run a specific tasks for this (with `update_password: always`):
-```
-ansible-playbook --ask-vault-pass site.yml -e update_passwords=true
-```
-
-> The reasons behind this decision is to avoid false `changed` reports and most
-> important, so it doesn't mesh around with passwords if this script is executed
-> in multiple machines (that should have different passwords for security).
-
 A `run_playbook.sh` script is also provided for convenience:
 ```bash
 ./run_playbook.sh
@@ -131,6 +120,29 @@ export the token and vault password for every new shell session:
 cp .env.sample .env
 vim .env # Edit the values
 ```
+
+## Deploy options
+
+As you may expect, by default, password is only set on user creation (`update_password: on_create`).
+If you want to update users password, explicitely specify `update_passwords=true`,
+to run a specific tasks for this (with `update_password: always`):
+```
+./run_playbook.sh -e update_passwords=true
+```
+
+> The reasons behind this decision is to avoid false `changed` reports and most
+> important, so it doesn't mesh around with passwords if this script is executed
+> in multiple machines (that should have different passwords for security).
+
+UFW by default does not clean previous rules, if you want to force a reset of
+the current rules, do it with `reset_ufw=true`:
+```bash
+./run_playbook.sh -e reset_ufw=true
+```
+
+> You can always of course run the full ansible command instead of using the
+> script since these flags are for ansible, and not for the script:
+> `ansible-playbook --ask-vault-pass site.yml -e update_passwords=true`
 
 ## Common issues
 
