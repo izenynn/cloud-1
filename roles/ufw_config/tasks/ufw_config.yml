@@ -1,0 +1,59 @@
+---
+- name: "Enable UFW"
+  ufw:
+    state: enabled
+  notify: reload ufw
+
+- name: "Set logging"
+  ufw:
+    logging: 'on'
+  notify: reload ufw
+
+- name: "Set default policy to deny incoming traffic"
+  ufw:
+    direction: incoming
+    policy: deny
+  notify: reload ufw
+
+- name: "Set default policy to allow outgoing traffic"
+  ufw:
+    direction: outgoing
+    policy: allow
+  notify: reload ufw
+
+- name: "Allow specified incoming ports"
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items: "{{ ufw_incoming }}"
+  when:
+    - ufw_incoming is defined
+    - ufw_incoming is iterable
+    - ufw_incoming | length > 0
+  notify: reload ufw
+
+- name: "Allow specified outgoing ports"
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+    direction: out
+  with_items: "{{ ufw_outgoing }}"
+  when:
+    - ufw_outgoing is defined
+    - ufw_outgoing is iterable
+    - ufw_outgoing | length > 0
+  notify: reload ufw
+
+- name: "Limit specified ports"
+  ufw:
+    rule: limit
+    port: "{{ item }}"
+    proto: tcp
+  with_items: "{{ ufw_limit }}"
+  when:
+    - ufw_limit is defined
+    - ufw_limit is iterable
+    - ufw_limit | length > 0
+  notify: reload ufw

@@ -1,0 +1,10 @@
+# Override default values here
+
+#ufw_incoming:
+#  - 80
+#  - 443
+
+#ufw_limit:
+#  - 4242
+
+#ufw_outgoing:

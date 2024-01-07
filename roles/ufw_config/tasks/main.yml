@@ -1,0 +1,6 @@
+---
+- name: "Include tasks for UFW package installation"
+  include_tasks: package_setup.yml
+
+- name: "Include tasks for UFW configuration"
+  include_tasks: ufw_config.yml

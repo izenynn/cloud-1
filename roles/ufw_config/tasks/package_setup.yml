@@ -1,0 +1,8 @@
+---
+- name: "Install ufw package (Family: Debian)"
+  tags:
+    - ufw
+  apt:
+    name: "{{ ufw_package }}"
+    state: present
+  when: ansible_facts['os_family'] == 'Debian'

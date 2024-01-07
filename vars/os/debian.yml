@@ -4,3 +4,4 @@ common_packages:
   - wget
   - vim
   - git
+ufw_package: ufw

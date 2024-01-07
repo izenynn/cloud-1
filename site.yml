@@ -95,17 +95,27 @@
       include_tasks: tasks/set_vars.yml
 
   tasks:
-    - name: "Apply common configuration"
+    - name: "Common configuration"
       tags:
         - always
         - setup
+        - common
       import_role:
         name: common
       become: true
 
-    - name: "Apply ssh configuration"
+    - name: "SSH configuration"
       tags:
         - setup
+        - ssh
       import_role:
         name: ssh_config
+      become: true
+
+    - name: "UFW configuration"
+      tags:
+        - setup
+        - ufw
+      import_role:
+        name: ufw_config
       become: true
