@@ -1,0 +1,12 @@
+---
+- name: "Update package cache (Ubuntu)"
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_facts['distribution'] == 'Ubuntu'
+
+- name: "Install common packages (Ubuntu)"
+  apt:
+    name: "{{ common_packages }}"
+    state: present
+  when: ansible_facts['distribution'] == 'Ubuntu'

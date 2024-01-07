@@ -1,5 +1,5 @@
 ---
-- name: Setup WordPress server
+- name: Apply common configuration
   hosts: all
   gather_facts: no
 
@@ -72,9 +72,24 @@
       debug:
         var: ansible_port
 
-  roles:
-    - role: common
+    - name: "Gather facts after setting SSH port"
       tags:
+        - always
+      setup:
+
+  tasks:
+    - name: "Include task to set distro specific variables"
+      tags:
+        - always
+      include_tasks: tasks/set_vars.yml
+
+    - name: "Apply common configuration to all nodes"
+      tags:
+        - always
         - setup
-        - common
+      import_role:
+        name: common
       become: true
+
+#- name: Setup WordPress server
+# TODO specific for wordpress tagged nodes
