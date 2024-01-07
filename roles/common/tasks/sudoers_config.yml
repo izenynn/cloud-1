@@ -1,18 +1,14 @@
 ---
-- name: "Add sudoers file for passwordless sudo users"
+- name: "Configure sudoers to read files from /etc/sudoers.d"
   tags:
     - user
     - sudoers
-  copy:
-    dest: "/etc/sudoers.d/10-user-{{ item.username }}"
-    content: "{{ item.username }} ALL=(ALL) NOPASSWD:ALL\n"
+  lineinfile:
+    path: /etc/sudoers
+    regexp: '^#includedir /etc/sudoers.d'
+    line: 'includedir /etc/sudoers.d'
     validate: 'visudo -cf %s'
-    owner: root
-    group: root
-    mode: 0440
-  no_log: "{{ ansible_verbosity < 1 }}"
-  when: item.is_sudo_nopasswd
-  with_items: "{{ users }}"
+  become: true
 
 - name: "Configure general sudo group in sudoers"
   tags:

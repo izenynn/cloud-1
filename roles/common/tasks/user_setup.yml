@@ -29,3 +29,29 @@
   no_log: "{{ ansible_verbosity < 1 }}"
   when: item.password is defined and (update_passwords | default(false))
   with_items: "{{ users }}"
+
+- name: "Set user SSH authorized key"
+  tags:
+    - user
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ item.authorized_key }}"
+    state: present
+    exclusive: false
+  no_log: "{{ ansible_verbosity < 1 }}"
+  when: item.authorized_key is defined
+  with_items: "{{ users }}"
+
+- name: "Add sudoers file for passwordless sudo users"
+  tags:
+    - user
+  copy:
+    dest: "/etc/sudoers.d/10-user-{{ item.username }}"
+    content: "{{ item.username }} ALL=(ALL) NOPASSWD:ALL\n"
+    validate: 'visudo -cf %s'
+    owner: root
+    group: root
+    mode: 0440
+  no_log: "{{ ansible_verbosity < 1 }}"
+  when: item.is_sudo_nopasswd
+  with_items: "{{ users }}"

@@ -2,6 +2,7 @@
 
 #additional_users:
 #  - username: example
-#    password: MySecurePassword#123 # Password is optional
+#    password: MySecurePassword#123 # Optional value
+#    authorized_key: MyPublicKeyForSSH # Optional value
 #    is_sudo: true
 #    is_sudo_nopasswd: false
