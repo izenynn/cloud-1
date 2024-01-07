@@ -1,2 +1,6 @@
 ---
-- include_tasks: users.yml
+- name: Include tasks for user creation
+  include_tasks: user_setup.yml
+
+- name: Include tasks for sudoers configuration
+  include_tasks: sudoers_config.yml
