@@ -142,6 +142,12 @@ the current rules, do it with `reset_ufw=true`:
 ./run_playbook.sh -e reset_ufw=true
 ```
 
+Docker compose by default does not restart if at least one container is running
+on the compose project, you can force a restart with `restart_compose=true`:
+```bash
+./run_playbook.sh -e restart_compose=true
+```
+
 > You can always of course run the full ansible command instead of using the
 > script since these flags are for ansible, and not for the script:
 > `ansible-playbook --ask-vault-pass site.yml -e update_passwords=true`

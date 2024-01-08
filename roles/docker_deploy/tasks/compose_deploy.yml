@@ -1,11 +1,11 @@
-- name: "Create docker volume directory"
+- name: "Create Docker volume directory"
   file:
     path: "{{ volumes_path }}"
     state: directory
     owner: "{{ deploy_user }}"
     group: "{{ deploy_user }}"
 
-- name: "Create docker volumes individual directories"
+- name: "Create Docker volumes individual directories"
   file:
     path: "{{ volumes_path }}/{{ item }}"
     state: directory
@@ -13,7 +13,15 @@
     group: "{{ deploy_user }}"
   loop: "{{ volumes }}"
 
-- name: "Deploy docker-compose"
+- name: "Register if Docker Compose project is running"
+  command: "docker-compose -f {{ deploy_path }}/docker-compose.yml ps -q"
+  register: compose_ps
+  become: true
+  become_user: "{{ deploy_user }}"
+  changed_when: false
+  ignore_errors: true
+
+- name: "Deploy Docker Compose"
   docker_compose:
     project_name: cloud-1
     project_src: "{{ deploy_path }}"
@@ -21,6 +29,7 @@
     state: present
     build: true
     nocache: false
-    restarted: true
+    restarted: "{{ restart_compose | default(false) | bool }}"
   become: true
   become_user: "{{ deploy_user }}"
+  when: compose_ps.stdout == "" or (restart_compose | default(false) | bool)

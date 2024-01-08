@@ -24,7 +24,7 @@
     update_password: always
     create_home: false
   no_log: "{{ ansible_verbosity < 1 }}"
-  when: item.password is defined and (update_passwords | default(false))
+  when: item.password is defined and (update_passwords | default(false) | bool)
   with_items: "{{ users }}"
 
 # ------------------------------------------------------------------------------
