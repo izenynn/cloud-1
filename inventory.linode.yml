@@ -1,7 +1,7 @@
 plugin: community.general.linode
 
 tags:
-  - ansible-wp
+  - ansible-cloud1
 
 keyed_groups:
   - key: tags
