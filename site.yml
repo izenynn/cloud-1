@@ -107,7 +107,6 @@
   tasks:
     - name: "Common configuration"
       tags:
-        - always
         - setup
         - common
       import_role:

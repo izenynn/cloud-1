@@ -135,7 +135,7 @@ http {
 
 			fastcgi_split_path_info ^(.+\.php)(/.*)$;
 
-			fastcgi_pass wordpress:9000;
+			fastcgi_pass wordpress:{{ wordpress_phpfpm_port }};
 			fastcgi_index index.php;
 	
 			include fastcgi_params;

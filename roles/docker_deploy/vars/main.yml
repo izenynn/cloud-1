@@ -5,6 +5,13 @@ containers:
     templates:
       - Dockerfile.j2
       - nginx.conf.j2
+  - name: wordpress
+    files:
+      - php-fpm.conf
+      - run.sh
+    templates:
+      - Dockerfile.j2
+      - www.conf.j2
 
 # Override default values here
 
@@ -15,3 +22,5 @@ containers:
 
 #nginx_generate_ssl: true
 nginx_server_name: "wp.izenynn.com"
+
+#wordpress_phpfpm_port: 9000

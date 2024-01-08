@@ -9,3 +9,14 @@
       path: "{{ deploy_path }}/nginx"
       nocache: false
       rm: true
+
+- name: "Build Wordpress (php-fpm) docker image"
+  docker_image:
+    name: cloud1_wordpress
+    tag: latest
+    state: present
+    source: build
+    build:
+      path: "{{ deploy_path }}/wordpress"
+      nocache: false
+      rm: true

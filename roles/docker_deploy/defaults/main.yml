@@ -5,3 +5,5 @@ alpine_version: 3.14
 
 nginx_generate_ssl: true
 nginx_server_name: "localhost 127.0.0.1"
+
+wordpress_phpfpm_port: 9000
