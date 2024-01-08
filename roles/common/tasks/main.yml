@@ -1,16 +1,9 @@
 ---
-- name: "Include tasks for package cache update and installation"
-  tags:
-    - packages
+- name: "Include tasks for packages cache update and installation"
   include_tasks: package_setup.yml
 
-- name: "Include tasks for user creation"
-  tags:
-    - users
+- name: "Include tasks for users creation"
   include_tasks: user_setup.yml
 
 - name: "Include tasks for sudoers configuration"
-  tags:
-    - users
-    - sudoers
   include_tasks: sudoers_config.yml

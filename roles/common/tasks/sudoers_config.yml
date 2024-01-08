@@ -1,5 +1,8 @@
 ---
 - name: "Configure sudoers to read files from /etc/sudoers.d"
+  tags:
+    - users
+    - sudoers
   lineinfile:
     path: /etc/sudoers
     line: '#includedir /etc/sudoers.d'
@@ -7,6 +10,9 @@
     validate: 'visudo -cf %s'
 
 - name: "Configure general sudo group in sudoers"
+  tags:
+    - users
+    - sudoers
   copy:
     dest: "/etc/sudoers.d/10-group-sudo"
     content: |
