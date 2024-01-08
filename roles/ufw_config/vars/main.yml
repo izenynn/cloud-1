@@ -7,4 +7,4 @@
 #ufw_limit:
 #  - 4242
 
-#ufw_outgoing:
+#ufw_outgoing: [] # Empty!

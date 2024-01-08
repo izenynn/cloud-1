@@ -1,0 +1,7 @@
+deploy_user: admin
+deploy_path: /home/{{ deploy_user }}/cloud-1
+
+alpine_version: 3.14
+
+nginx_generate_ssl: true
+nginx_server_name: "localhost 127.0.0.1"

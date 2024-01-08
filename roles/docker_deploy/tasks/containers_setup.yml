@@ -1,0 +1,28 @@
+---
+- name: "Create directories for containers"
+  file:
+    path: "{{ deploy_path }}/{{ item.name }}"
+    state: directory
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+  loop: "{{ containers }}"
+
+- name: "Copy regular files for containers"
+  copy:
+    src: "{{ item.0.name }}/{{ item.1 }}"
+    dest: "{{ deploy_path }}/{{ item.0.name }}/{{ item.1 }}"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    mode: 0755
+  loop: "{{ containers | subelements('files', skip_missing=True) }}"
+  when: item.1 | length > 0
+
+- name: "Copy templates for containers"
+  template:
+    src: "{{ item.0.name }}/{{ item.1 }}"
+    dest: "{{ deploy_path }}/{{ item.0.name }}/{{ item.1 | regex_replace('.j2$', '') }}"
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    mode: 0755
+  loop: "{{ containers | subelements('templates', skip_missing=True) }}"
+  when: item.1 | length > 0

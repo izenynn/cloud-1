@@ -1,0 +1,13 @@
+---
+- name: "Include tasks for containers setup"
+  tags:
+    - containers
+  include_tasks: containers_setup.yml
+
+- name: "Include tasks for containers build"
+  tags:
+    - containers
+  include_tasks: containers_build.yml
+
+#- name: "Include tasks for containers deploy"
+# tags: compose

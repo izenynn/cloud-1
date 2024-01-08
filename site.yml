@@ -1,13 +1,23 @@
 ---
-- name: Setup WordPress server
+- name: Setup Cloud-1 Server
   hosts: all
   gather_facts: no
 
   vars_files:
-    - vars/main.yml
     - vars/vault.yml
 
   pre_tasks:
+    - name: "Include default variables"
+      tags:
+        - always
+      include_vars:
+        file: defaults/main.yml
+    - name: "Include variable overrides"
+      tags:
+        - always
+      include_vars:
+        file: vars/main.yml
+
     - name: "Check custom SSH port availability"
       tags:
         - always
@@ -127,3 +137,10 @@
       import_role:
         name: docker_setup
       become: true
+
+    - name: "Docker build and deploy"
+      tags:
+        - deploy
+        - docker
+      import_role:
+        name: docker_deploy

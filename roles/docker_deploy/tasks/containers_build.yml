@@ -1,0 +1,11 @@
+---
+- name: "Build Nginx docker image"
+  docker_image:
+    name: cloud1_nginx
+    tag: latest
+    state: present
+    source: build
+    build:
+      path: "{{ deploy_path }}/nginx"
+      nocache: false
+      rm: true

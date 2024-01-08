@@ -1,0 +1,17 @@
+# Do not edit
+
+containers:
+  - name: nginx
+    templates:
+      - Dockerfile.j2
+      - nginx.conf.j2
+
+# Override default values here
+
+#deploy_user: admin
+#deploy_path: /home/{{ deploy_user }}/cloud-1
+
+#alpine_version: 3.14
+
+#nginx_generate_ssl: true
+nginx_server_name: "wp.izenynn.com"
