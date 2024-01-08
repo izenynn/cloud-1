@@ -139,7 +139,7 @@
 
     - name: "Docker build and deploy"
       tags:
-        - deploy
+        - build
         - docker
       import_role:
         name: docker_deploy
