@@ -11,7 +11,7 @@ inventory file.
 
 Supported systems:
 
-- `Ubuntu`.
+- Ubuntu.
 
 The docker deployed services/utilities include:
 
@@ -182,6 +182,6 @@ python3 -m pip install --upgrade urllib3
 ```
 
 And `request` in case you get a warning about not supported `urllib3` version:
-```bas
+```bash
 python3 -m pip install --upgrade requests
 ```
