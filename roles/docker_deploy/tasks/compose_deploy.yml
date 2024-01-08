@@ -9,8 +9,16 @@
   file:
     path: "{{ volumes_path }}/{{ item }}"
     state: directory
-    owner: "{{ deploy_user }}"
-    group: "{{ deploy_user }}"
+  loop: "{{ volumes }}"
+
+- name: "Set default ACLs on Docker volumes directories"
+  acl:
+    path: "{{ volumes_path }}/{{ item }}"
+    entity: "{{ deploy_user }}"
+    etype: user
+    permissions: rwx
+    state: present
+    default: yes
   loop: "{{ volumes }}"
 
 - name: "Register if Docker Compose project is running"
