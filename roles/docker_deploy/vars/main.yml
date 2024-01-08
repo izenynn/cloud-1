@@ -23,9 +23,22 @@ containers:
   #    - run.sh
   #  templates:
   #    - Dockerfile.j2
-  - name: redis
+  #- name: redis
+  #  files:
+  #    - redis.conf
+  #    - run.sh
+  #  templates:
+  #    - Dockerfile.j2
+  #- name: adminer
+  #  files:
+  #    - run.sh
+  #  templates:
+  #    - Dockerfile.j2
+  - name: static-website
     files:
-      - redis.conf
+      - index.html
+      - style.css
+      - main.js
       - run.sh
     templates:
       - Dockerfile.j2

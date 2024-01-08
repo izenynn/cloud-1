@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- favicon -->
+		<link red="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+		<link red="icon" sizes="32x32" href="./favicon-32x32.png">
+		<link red="icon" sizes="16x16" href="./favicon-16x16.png">
+		<!-- <link rel="manifest" href="./site.webmanifest"> -->
+		<title>izenynn</title>
+
+		<!-- font awesome icons cdn -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+		<!-- custom style.css file -->
+		<link rel="stylesheet" href="./style.css">
+	</head>
+	<body>
+		<!-- header -->
+			<header id="header" class="shadow bg-light">
+				<nav class="container navbar">
+					<a href="./index.html" class="nav-brand text-dark">
+						izenynn
+					</a>
+
+					<!-- toggle button -->
+					<button class="toggle-button">
+						<span><i class="fas fa-bars"></i></span>
+					</button>
+
+					<!-- collapse on toggle button click -->
+					<div class="collapse">
+						<ul class="navbar-nav">
+							<a href="#" class="nav-link">Home</a>
+							<a href="/wordpress" class="nav-link">Blog</a>
+							<a href="#" class="nav-link">About</a>
+							<a href="#" class="nav-link">Contact</a>
+						</ul>
+					</div>
+
+					<!-- collapse on toggle button click -->
+					<div class="collapse">
+						<ul class="navbar-nav">
+							<div class="search-box">
+								<a href="#" class="nav-link"><i class="fas fa-search"></i></a>
+							</div>
+							<a href="#" class="nav-link"><i class="fab fa-github"></i></a>
+							<a href="#" class="nav-link"><i class="fab fa-linkedin"></i></a>
+							<a href="#" class="nav-link"><i class="fab fa-instagram"></i></a>
+							<a href="#" class="nav-link"><i class="fas fa-envelope"></i></a>
+						</ul>
+					</div>
+				</nav>
+			</header>
+		<!-- .header -->
+
+		<!-- main site -->
+			<main id="site-main">
+				<!-- blog post section -->
+					<section id="posts">
+						<div class="container">
+							<div class="grid">
+								<!-- grid item -->
+									<div class="grid-item">
+										<img src="./assets/img0.jpg" alt="image 0" class="img-fluid">
+									</div>
+									<div class="grid-item">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat dapibus tempus. Donec rutrum ligula at diam faucibus, id placerat odio mollis. Sed accumsan consectetur erat, in tempor turpis luctus ut. Integer vel orci nunc. Proin a volutpat nisi, sed auctor ex. Praesent nec ipsum elementum, venenatis magna sed, consectetur lorem. Sed orci tellus, fringilla in tortor eu, efficitur consequat purus. Aenean lectus nibh, rutrum et neque quis, ultrices porttitor mauris. Duis fermentum dolor nulla, eget vestibulum turpis vehicula non. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ac mauris sem. Fusce viverra ullamcorper cursus. Maecenas dignissim dictum velit ac ornare. Donec eu metus ultrices, consectetur neque nec, luctus ante. Aliquam erat volutpat.</p>
+									</div>
+									<div class="grid-item">
+										<article class="article">
+											<div class="card">
+												<div class="overflow-img">
+													<a href="#">
+														<img src="./assets/img1.jpg" alt="image 1" class="img-fluid">
+													</a>
+												</div>
+												<div class="card-body text-center px-1">
+													<a href="#" class="text-title display-1 text-dark">
+														just a sample text
+													</a>
+													<p class="secondary-title text-secondary display-3">
+														<span><i class="far fa-clock text-primary"></i>April Wed 02, 2022</span>
+														<span><i class="far fa-comments text-primary"></i>12</span>
+													</p>
+												</div>
+											</div>
+										</article>
+									</div>
+								<!-- .grid item -->
+							</div>
+
+							<!-- load more button -->
+							<div class="text-center">
+								<a href="/wordpress">
+									<button class="btn btn-primary secondary-title text-light">Go to my posts</button>
+								</a>
+							</div>
+						</div>
+					</section>
+				<!-- .blog post section -->
+			</main>
+		<!-- .main site -->
+
+		<!-- footer -->
+		<footer id="footer">
+			<div class="copyrights">
+				<p class="text-center text-secondary display-2">
+					© 2022 <a href="#" class="text-primary">izenynn</a>
+				</p>
+			</div>
+		</footer>
+		<!-- .footer -->
+		<!-- images loaded library to fix mansory-->
+		<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+		<!-- masonry library for horizontal grid -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.min.js" integrity="sha512-coKEwkkVJR6lO1aL/rJeVFojNKG1DRNbAfuxcvFC98W9TYBO9TQIVFXiHBBx6dRL9+effSNEYIr/5vLe5HENVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+		<!-- custom js -->
+		<script src="./main.js"></script>
+	</body>
+</html>

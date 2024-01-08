@@ -1,0 +1,10 @@
+FROM alpine:{{ alpine_version }}
+
+# static website
+RUN mkdir /tmp/website
+COPY index.html /tmp/website/
+COPY style.css /tmp/website/
+COPY main.js /tmp/website/
+
+COPY run.sh /tmp/run.sh
+CMD ["sh", "/tmp/run.sh"]

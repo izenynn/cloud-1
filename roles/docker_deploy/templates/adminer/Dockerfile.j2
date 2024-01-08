@@ -1,0 +1,7 @@
+FROM alpine:{{ alpine_version }}
+
+RUN apk update && apk upgrade && apk add --no-cache \
+	wget
+
+COPY run.sh /tmp/run.sh
+CMD ["sh", "/tmp/run.sh"]
