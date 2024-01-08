@@ -103,7 +103,8 @@ so you can create this file easily:
 
 ## Deploy
 
-If deploying on `Linode` export your API token:
+Adjust the inventory to your needs, if deploying on `Linode` add the `ansible-cloud1`
+tag to the target machines, and export your API token:
 ```bash
 export LINODE_API_TOKEN='your_token_here'
 ```
