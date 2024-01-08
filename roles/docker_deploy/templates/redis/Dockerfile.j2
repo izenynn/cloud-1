@@ -1,0 +1,9 @@
+FROM alpine:{{ alpine_version }}
+
+RUN apk update && apk upgrade && apk add --no-cache \
+	redis;
+
+COPY redis.conf /tmp/redis.conf
+
+COPY run.sh /tmp/run.sh
+CMD ["sh", "/tmp/run.sh"]

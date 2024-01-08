@@ -1,25 +1,31 @@
 # Do not edit
 
 containers:
-  - name: nginx
-    templates:
-      - Dockerfile.j2
-      - nginx.conf.j2
-  - name: wordpress
+  #- name: nginx
+  #  templates:
+  #    - Dockerfile.j2
+  #    - nginx.conf.j2
+  #- name: wordpress
+  #  files:
+  #    - php-fpm.conf
+  #    - www.conf
+  #    - run.sh
+  #  templates:
+  #    - Dockerfile.j2
+  #- name: mariadb
+  #  files:
+  #    - run.sh
+  #  templates:
+  #    - Dockerfile.j2
+  #- name: ftp
+  #  files:
+  #    - vsftpd.conf
+  #    - run.sh
+  #  templates:
+  #    - Dockerfile.j2
+  - name: redis
     files:
-      - php-fpm.conf
-      - www.conf
-      - run.sh
-    templates:
-      - Dockerfile.j2
-  - name: mariadb
-    files:
-      - run.sh
-    templates:
-      - Dockerfile.j2
-  - name: ftp
-    files:
-      - vsftpd.conf
+      - redis.conf
       - run.sh
     templates:
       - Dockerfile.j2
