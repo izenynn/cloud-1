@@ -5,5 +5,7 @@ RUN apk update && apk upgrade && apk add --no-cache \
 
 COPY vsftpd.conf /tmp/vsftpd.conf
 
+EXPOSE 21
+
 COPY run.sh /tmp/run.sh
 CMD ["sh", "/tmp/run.sh"]

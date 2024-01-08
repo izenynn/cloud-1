@@ -74,7 +74,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 
 WORKDIR /var/www/html/wordpress
 
-EXPOSE {{ wordpress_phpfpm_port }}
+EXPOSE 9000
 
 COPY run.sh /tmp/run.sh
 CMD ["sh", "/tmp/run.sh"]

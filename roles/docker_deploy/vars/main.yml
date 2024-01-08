@@ -8,10 +8,10 @@ containers:
   - name: wordpress
     files:
       - php-fpm.conf
+      - www.conf
       - run.sh
     templates:
       - Dockerfile.j2
-      - www.conf.j2
   - name: mariadb
     files:
       - run.sh
@@ -33,5 +33,3 @@ containers:
 
 #nginx_generate_ssl: true
 nginx_server_name: "wp.izenynn.com"
-
-#wordpress_phpfpm_port: 9000
