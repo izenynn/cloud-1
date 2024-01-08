@@ -24,6 +24,7 @@ services:
         networks:
             - public
             - private
+        restart: always
         environment:
             DOMAIN_NAME: ${DOMAIN_NAME}
             MYSQL_HOST: ${MYSQL_HOST}
