@@ -1,33 +1,12 @@
 ---
-- name: "Build Nginx Docker Image"
+- name: "Build Docker Images"
   docker_image:
-    name: cloud1_nginx
+    name: "cloud1_{{ item.name }}"
     tag: latest
     state: present
     source: build
     build:
-      path: "{{ deploy_path }}/nginx"
+      path: "{{ deploy_path }}/{{ item.name }}"
       nocache: false
       rm: true
-
-- name: "Build Wordpress (php-fpm) Docker Image"
-  docker_image:
-    name: cloud1_wordpress
-    tag: latest
-    state: present
-    source: build
-    build:
-      path: "{{ deploy_path }}/wordpress"
-      nocache: false
-      rm: true
-
-- name: "Build MariaDB Docker Image"
-  docker_image:
-    name: cloud1_mariadb
-    tag: latest
-    state: present
-    source: build
-    build:
-      path: "{{ deploy_path }}/mariadb"
-      nocache: false
-      rm: true
+  loop: "{{ containers }}"

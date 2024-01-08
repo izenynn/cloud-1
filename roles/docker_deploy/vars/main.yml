@@ -17,6 +17,12 @@ containers:
       - run.sh
     templates:
       - Dockerfile.j2
+  - name: ftp
+    files:
+      - vsftpd.conf
+      - run.sh
+    templates:
+      - Dockerfile.j2
 
 # Override default values here
 
