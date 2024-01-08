@@ -1,10 +1,10 @@
 ufw_incoming:
   - 80
   - 443
-  - 21
   - 21100:21110
 
 ufw_limit:
   - 4242
+  - 21
 
 ufw_outgoing: [] # Empty!
