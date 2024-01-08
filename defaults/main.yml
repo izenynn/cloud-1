@@ -1,1 +1,2 @@
-# No global defaults
+deploy_user: admin
+deploy_path: /home/{{ deploy_user }}/cloud-1

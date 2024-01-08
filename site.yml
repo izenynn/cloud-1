@@ -137,9 +137,16 @@
         name: docker_setup
       become: true
 
-    - name: "Docker build and deploy"
+    - name: "Docker containers build"
       tags:
         - build
         - docker
       import_role:
         name: docker_build
+
+    - name: "Docker compose deploy"
+      tags:
+        - deploy
+        - docker
+      import_role:
+        name: docker_deploy

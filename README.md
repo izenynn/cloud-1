@@ -89,10 +89,11 @@ Since the `./vars/vault.yml` is encrypted, for the sake of you knowing what shou
 be there, here's a list of required variables, that must be preset in the vault,
 so you can create this file easily:
 
-- `admin_user_password`: password for the `admin` user.
+- `vault_admin_user_password`: password for the `admin` user.
 
-- `ansible_user_authorized_key`: public key to add to `ansible` authorized keys.
-- `admin_user_authorized_key`: public key to add to `admin` authorized keys.
+- `vault_ansible_user_authorized_key`: public key to add to `ansible` authorized keys.
+- `vault_admin_user_authorized_key`: public key to add to `admin` authorized keys.
+- All the docker secrets, look in `./roles/docker_deploy/defaults/main.yml` for the variable names.
 
 > If you create additonal users, make sure to place those new passwords in the
 > vault too!

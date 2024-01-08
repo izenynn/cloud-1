@@ -1,0 +1,6 @@
+---
+- name: "Include tasks for docker compose setup"
+  include_tasks: compose_setup.yml
+
+- name: "Include tasks for docker compose deploy"
+  include_tasks: compose_deploy.yml

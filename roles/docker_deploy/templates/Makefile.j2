@@ -1,0 +1,53 @@
+#################### VARIABLES ####################
+
+ENV_FILE = ./.env
+
+VOLUMES_PATH = {{ deploy_path }}/data
+VOLUMES_DIR = db_data web_data
+
+VOLUMES = $(addprefix $(VOLUMES_PATH)/, $(VOLUMES_DIR))
+VOLUME_PREFIX = cloud-1_
+
+CONTAINERS = nginx wordpress mariadb ftp redis adminer static-website phpmyadmin
+
+COMMANDS = top ps start restart pause unpause down config events up images
+
+DOCKER_COMPOSE = docker-compose -f ./docker-compose.yml
+DOCKER = docker
+
+#################### RULES ####################
+
+all: stop load
+
+load: | $(VOLUMES)
+	$(DOCKER_COMPOSE) --env-file $(ENV_FILE) up -d --build
+
+debug: | $(VOLUMES)
+	$(DOCKER_COMPOSE) --env-file $(ENV_FILE) up --build
+
+$(VOLUMES):
+	mkdir -p $(VOLUMES)
+
+stop:
+	$(DOCKER_COMPOSE) --env-file $(ENV_FILE) down
+
+clean: stop
+	$(DOCKER) volume rm $(addprefix $(VOLUME_PREFIX), $(VOLUMES_DIR)) -f
+	$(DOCKER) volume prune -f
+	rm -rf $(VOLUMES_PATH) || rm -rf $(VOLUMES) && rm -rf $(VOLUMES_PATH)
+
+prune: clean
+	$(DOCKER) system prune -af
+
+re: prune load
+
+$(CONTAINERS):
+	$(DOCKER) exec -ti $(addprefix $(CONTAINER_PREFIX), $@) sh
+
+$(COMMANDS):
+	$(DOCKER_COMPOSE) $@
+
+logs:
+	$(DOCKER_COMPOSE) $@ -f
+
+.PHONY: all load debug stop clean prune re

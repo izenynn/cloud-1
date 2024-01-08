@@ -1,0 +1,25 @@
+- name: "Create docker volume directory"
+  file:
+    path: "{{ volumes_path }}"
+    state: directory
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+
+- name: "Create docker volumes individual directories"
+  file:
+    path: "{{ volumes_path }}/{{ item }}"
+    state: directory
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+  loop: "{{ volumes }}"
+
+- name: "Deploy docker-compose"
+  docker_compose:
+    project_name: cloud-1
+    project_src: "{{ deploy_path }}"
+    env_file: "./.env"
+    state: present
+    build: true
+    nocache: false
+  become: true
+  become_user: "{{ deploy_user }}"

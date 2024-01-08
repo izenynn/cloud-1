@@ -1,0 +1,35 @@
+# Docker volumes
+
+volumes_path: "{{ deploy_path }}/data"
+volumes:
+  - "db_data"
+  - "web_data"
+
+# Docker variables
+
+domain_name: "localhost"
+
+mysql_host: "mariadb"
+mysql_root_password: "{{ vault_mysql_root_password }}"
+
+wp_db_name: "wordpress"
+wp_db_user: "{{ vault_wp_db_user }}"
+wp_db_password: "{{ vault_wp_db_password }}"
+
+wp_title: "cloud-1"
+
+wp_admin_user: "{{ vault_wp_admin_user }}"
+wp_admin_password: "{{ vault_wp_admin_password }}"
+wp_admin_email: "{{ vault_wp_admin_email }}"
+
+wp_user: "{{ vault_wp_user }}"
+wp_password: "{{ vault_wp_password }}"
+wp_email: "{{ vault_wp_email }}"
+
+wp_file_oninstall: "wp_install_done"
+
+redis_host: "redis"
+redis_password: "{{ vault_redis_password }}"
+
+ftp_user: "{{ vault_ftp_user }}"
+ftp_password: "{{ vault_ftp_password }}"

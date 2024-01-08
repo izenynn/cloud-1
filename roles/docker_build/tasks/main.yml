@@ -8,6 +8,3 @@
   tags:
     - containers
   include_tasks: containers_build.yml
-
-#- name: "Include tasks for containers deploy"
-# tags: compose

@@ -3,5 +3,6 @@ common_packages:
   - curl
   - wget
   - vim
+  - acl
   - git
 ufw_package: ufw
