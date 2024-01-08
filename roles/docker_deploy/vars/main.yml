@@ -1,44 +1,49 @@
 # Do not edit
 
 containers:
-  #- name: nginx
-  #  templates:
-  #    - Dockerfile.j2
-  #    - nginx.conf.j2
-  #- name: wordpress
-  #  files:
-  #    - php-fpm.conf
-  #    - www.conf
-  #    - run.sh
-  #  templates:
-  #    - Dockerfile.j2
-  #- name: mariadb
-  #  files:
-  #    - run.sh
-  #  templates:
-  #    - Dockerfile.j2
-  #- name: ftp
-  #  files:
-  #    - vsftpd.conf
-  #    - run.sh
-  #  templates:
-  #    - Dockerfile.j2
-  #- name: redis
-  #  files:
-  #    - redis.conf
-  #    - run.sh
-  #  templates:
-  #    - Dockerfile.j2
-  #- name: adminer
-  #  files:
-  #    - run.sh
-  #  templates:
-  #    - Dockerfile.j2
+  - name: nginx
+    templates:
+      - Dockerfile.j2
+      - nginx.conf.j2
+  - name: wordpress
+    files:
+      - php-fpm.conf
+      - www.conf
+      - run.sh
+    templates:
+      - Dockerfile.j2
+  - name: mariadb
+    files:
+      - run.sh
+    templates:
+      - Dockerfile.j2
+  - name: ftp
+    files:
+      - vsftpd.conf
+      - run.sh
+    templates:
+      - Dockerfile.j2
+  - name: redis
+    files:
+      - redis.conf
+      - run.sh
+    templates:
+      - Dockerfile.j2
+  - name: adminer
+    files:
+      - run.sh
+    templates:
+      - Dockerfile.j2
   - name: static-website
     files:
       - index.html
       - style.css
       - main.js
+      - run.sh
+    templates:
+      - Dockerfile.j2
+  - name: phpmyadmin
+    files:
       - run.sh
     templates:
       - Dockerfile.j2
