@@ -2,6 +2,7 @@ default_users:
   - username: ansible
     # password not defined, locked user (only for ssh via auth-key)
     authorized_key: "{{ vault_ansible_user_authorized_key }}" # in `vault.yml`
+    create_home: true
     is_sudo: true
     is_sudo_nopasswd: true
   - username: admin

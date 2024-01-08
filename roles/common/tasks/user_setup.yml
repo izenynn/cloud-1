@@ -1,5 +1,5 @@
 ---
-- name: "Merge user lists"
+- name: "Merge users lists"
   tags:
     - users
   set_fact:
@@ -17,7 +17,7 @@
     state: present
     password: "{{ (item.password | default('') | password_hash('sha512')) if item.password is defined else omit }}"
     update_password: on_create
-    create_home: "{{ item.create_home | default(true) }}"
+    create_home: "{{ item.create_home | default(true) | bool }}"
   no_log: "{{ ansible_verbosity < 1 }}"
   with_items: "{{ users }}"
 
@@ -74,6 +74,21 @@
   no_log: "{{ ansible_verbosity < 1 }}"
   when: item.authorized_key is defined
   with_items: "{{ users }}"
+
+# ------------------------------------------------------------------------------
+# CREATE ANSIBLE REMOTE_TMP DIR FOR DEFAULT_USERS
+# ------------------------------------------------------------------------------
+
+- name: "Ensure correct permissions for .ansible/tmp for default users"
+  file:
+    path: "/home/{{ item.username }}/.ansible/tmp"
+    state: directory
+    owner: "{{ item.username }}"
+    group: "{{ item.username }}"
+    mode: '0755'
+  no_log: "{{ ansible_verbosity < 1 }}"
+  when: item.create_home | default(true) | bool
+  with_items: "{{ default_users }}"
 
 # ------------------------------------------------------------------------------
 # SUDO & SUDOERS
