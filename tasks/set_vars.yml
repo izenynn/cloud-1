@@ -1,7 +1,0 @@
-- name: "Include Debian OS specific variables"
-  tags:
-    - always
-  include_vars:
-    file: os/debian.yml
-  when:
-    - ansible_facts['os_family'] == 'Debian'

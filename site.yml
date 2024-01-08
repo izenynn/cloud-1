@@ -102,7 +102,7 @@
     - name: "Include task to set distro specific variables"
       tags:
         - always
-      include_tasks: tasks/set_vars.yml
+      include_tasks: tasks/include_vars.yml
 
   tasks:
     - name: "Common configuration"

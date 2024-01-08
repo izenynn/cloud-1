@@ -1,0 +1,9 @@
+- name: "Include OS specific variables, or default if not found"
+  tags:
+    - always
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "distro/{{ ansible_facts['distribution'] }}-{{ ansible_facts['distribution_version'] }}.yml"
+    - "distro/{{ ansible_facts['distribution'] }}.yml"
+    - "os/{{ ansible_facts['os_family'] }}.yml"
+    - "os/default.yml"
