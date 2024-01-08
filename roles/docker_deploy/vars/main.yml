@@ -9,7 +9,7 @@
 
 # Docker variables
 
-#domain_name: "localhost"
+domain_name: "wp.izenynn.com"
 
 #mysql_host: "mariadb"
 #mysql_root_password: "{{ vault_mysql_root_password }}"
