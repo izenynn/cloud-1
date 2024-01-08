@@ -21,5 +21,6 @@
     state: present
     build: true
     nocache: false
+    restarted: true
   become: true
   become_user: "{{ deploy_user }}"
