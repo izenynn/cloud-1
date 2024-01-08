@@ -1,0 +1,10 @@
+FROM alpine:{{ alpine_version }}
+
+RUN apk update && apk upgrade && apk add --no-cache \
+	mariadb mariadb-client mariadb-common && \
+	rm -rf /var/cache/apk/*
+
+COPY run.sh /tmp/run.sh
+RUN chmod +x /tmp/run.sh
+
+CMD ["sh", "/tmp/run.sh"]

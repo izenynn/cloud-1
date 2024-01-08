@@ -12,6 +12,11 @@ containers:
     templates:
       - Dockerfile.j2
       - www.conf.j2
+  - name: mariadb
+    files:
+      - run.sh
+    templates:
+      - Dockerfile.j2
 
 # Override default values here
 
