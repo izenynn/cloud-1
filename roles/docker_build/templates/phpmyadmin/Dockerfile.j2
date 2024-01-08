@@ -2,7 +2,7 @@ FROM alpine:{{ alpine_version }}
 
 RUN apk update && apk upgrade && apk add --no-cache \
 	wget	\
-	tar
+	unzip
 
 WORKDIR /var/www/html
 
