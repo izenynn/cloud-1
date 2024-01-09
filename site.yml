@@ -2,6 +2,15 @@
 - name: Setup Cloud-1 Server
   hosts: all
   gather_facts: no
+  module_defaults:
+    setup:
+      gather_subset:
+        - '!all'
+        - '!min'
+        - os_family
+        - distribution
+        - distribution_version
+        - distribution_major_version
 
   vars_files:
     - vars/vault.yml
