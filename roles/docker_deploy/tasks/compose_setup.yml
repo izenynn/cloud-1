@@ -1,23 +1,21 @@
-- name: "Copy Makefile for local administration"
-  template:
-    src: "Makefile.j2"
-    dest: "{{ deploy_path }}/Makefile"
-    owner: "{{ deploy_user }}"
-    group: "{{ deploy_user }}"
-    mode: 0755
+- block:
+  - name: "Copy Makefile for local administration"
+    template:
+      src: "Makefile.j2"
+      dest: "{{ deploy_path }}/Makefile"
 
-- name: "Copy .env file"
-  template:
-    src: ".env.j2"
-    dest: "{{ deploy_path }}/.env"
-    owner: "{{ deploy_user }}"
-    group: "{{ deploy_user }}"
-    mode: 0755
+  - name: "Copy .env file"
+    template:
+      src: ".env.j2"
+      dest: "{{ deploy_path }}/.env"
 
-- name: "Copy docker-compose.yml file"
-  template:
-    src: "docker-compose.yml.j2"
-    dest: "{{ deploy_path }}/docker-compose.yml"
-    owner: "{{ deploy_user }}"
-    group: "{{ deploy_user }}"
-    mode: 0755
+  - name: "Copy docker-compose.yml file"
+    template:
+      src: "docker-compose.yml.j2"
+      dest: "{{ deploy_path }}/docker-compose.yml"
+
+  module_defaults:
+    template:
+      owner: "{{ deploy_user }}"
+      group: "{{ deploy_user }}"
+      mode: 0755

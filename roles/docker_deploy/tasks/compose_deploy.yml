@@ -1,15 +1,22 @@
-- name: "Create Docker volume directory"
-  file:
-    path: "{{ volumes_path }}"
-    state: directory
-    owner: "{{ deploy_user }}"
-    group: "{{ deploy_user }}"
+- block:
+  - name: "Create Docker volume directory"
+    file:
+      path: "{{ volumes_path }}"
+      state: directory
 
-- name: "Create Docker volumes individual directories"
-  file:
-    path: "{{ volumes_path }}/{{ item }}"
-    state: directory
-  loop: "{{ volumes }}"
+  - name: "Create Docker volumes individual directories"
+    file:
+      path: "{{ volumes_path }}/{{ item }}"
+      state: directory
+    loop: "{{ volumes }}"
+    module_defaults:
+      file: {}
+
+  module_defaults:
+    file:
+      owner: "{{ deploy_user }}"
+      group: "{{ deploy_user }}"
+      mode: 0755
 
 - name: "Set default ACLs on Docker volumes directories"
   acl:
