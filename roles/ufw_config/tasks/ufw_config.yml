@@ -69,7 +69,7 @@
     - name: "Disable UFW to maintain access"
       ufw:
         state: disabled
-      ignore_errors: yes
+      ignore_errors: true
 
     - name: "Fail during UFW configuration"
       fail:

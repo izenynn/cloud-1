@@ -7,7 +7,7 @@
   service:
     name: docker
     state: started
-    enabled: yes
+    enabled: true
 
 # ------------------------------------------------------------------------------
 # DOCKER GROUP

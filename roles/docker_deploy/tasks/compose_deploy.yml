@@ -25,7 +25,7 @@
     etype: user
     permissions: rwx
     state: present
-    default: yes
+    default: true
   loop: "{{ volumes }}"
 
 - name: "Register if Docker Compose project is running"
