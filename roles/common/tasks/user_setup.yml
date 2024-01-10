@@ -79,7 +79,7 @@
 # CREATE ANSIBLE REMOTE_TMP DIR FOR DEFAULT_USERS
 # ------------------------------------------------------------------------------
 
-- name: "Ensure correct permissions for .ansible/tmp for default users"
+- name: "Ensure correct state of remote_tmp directory for default users"
   file:
     path: "/home/{{ item.username }}/.ansible/tmp"
     state: directory
