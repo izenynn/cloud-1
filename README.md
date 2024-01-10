@@ -48,7 +48,7 @@ sudo apt install python3
 
 `ansible` and `linode_api4` can be installed via `pip` once `python3` is installed:
 ```bash
-python3 -m pip install --user ansible linode_api4 passlib
+python3 -m pip install --user ansible linode_api4
 ```
 
 ### Ansible plugin collection: community.general
