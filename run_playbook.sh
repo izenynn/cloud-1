@@ -2,6 +2,12 @@
 
 playbook="site.yml"
 
+# Android (termux) bug with '~/.ansible/tmp' work around
+os_name=$(uname -o)
+if [ "$os_name" = "Android" ]; then
+	export ANSIBLE_REMOTE_TMP='$HOME/.ansible/tmp'
+fi
+
 # Clean up function to ensure password file is deleted
 cleanup() {
     echo "Cleaning up vault password file..."
