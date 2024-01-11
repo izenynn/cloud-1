@@ -2,7 +2,7 @@
 
 ENV_FILE = ./.env
 
-VOLUMES_PATH = {{ deploy_path }}/data
+VOLUMES_PATH = {{ volumes_path }}
 VOLUMES_DIR = db_data web_data
 
 VOLUMES = $(addprefix $(VOLUMES_PATH)/, $(VOLUMES_DIR))
